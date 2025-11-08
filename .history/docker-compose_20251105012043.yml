@@ -1,0 +1,18 @@
+version: '3.8'
+services:
+  db:
+    image: postgres:18
+    container_name: labellingproject-db
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: ${MYSQL_DATABASE}
+      POSTGRES_PASSWORD: labeller123
+      POSTGRES_DB: labellingdb
+    # mount volume trực tiếp vào /var/lib/postgresql, PostgreSQL 18+ sẽ tự tạo subfolder
+    volumes:
+      - db-data:/var/lib/postgresql
+
+volumes:
+  db-data:
